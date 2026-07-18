@@ -4,8 +4,8 @@ import { HomePage } from './pages/HomePage';
 import { HistoryPage } from './pages/HistoryPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import { ProtectedRoute } from './routes/ProtectedRoute';
 import { ClientShell } from './layout/ClientShell/ClientShell';
+import { ProtectedRoute } from './routes/ProtectedRoute';
 
 function App() {
   return (
