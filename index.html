@@ -3,9 +3,20 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/ic_frame_2.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ICORE SMS Client Portal</title>
+  <link rel="icon" type="image/svg+xml" href="/ic_frame_2.svg" />
+  <link rel="apple-touch-icon" href="/ic_frame_2.png" />
+
+  <!-- Pinch-zoom disabled deliberately for this app — see design decisions -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a253c" />
+
+  <!-- iOS PWA support — Safari doesn't fully honor the web manifest -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ICORE SMS" />
+
+  <title>ICORE SMS — Client Portal</title>
 </head>
 
 <body>
