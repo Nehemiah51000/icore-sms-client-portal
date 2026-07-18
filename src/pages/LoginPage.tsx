@@ -4,13 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
-import { loginSchema, type LoginFormValues } from '../lib/schemas/authSchemas';
 import { loginClient } from '../lib/api/auth';
 import { useAuthStore } from '../stores/authStore';
 import { ApiError } from '../lib/api';
 import { Button } from '../ui/Button/Button';
 import { Card, CardBody } from '../ui/Card/Card';
 import { Input } from '../ui/Input/Input';
+import { loginSchema, type LoginFormValues } from '../lib/schemas/authSchemas';
 
 export function LoginPage() {
   const navigate = useNavigate();
