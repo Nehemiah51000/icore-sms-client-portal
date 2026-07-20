@@ -8,6 +8,7 @@ import { ErrorBoundary } from './ui/ErrorBoundary/ErrorBoundary';
 import { OfflineBanner } from './ui/OfflineBanner/OfflineBanner';
 import { queryClient } from './lib/queryClient';
 import './index.css';
+import { InstallPrompt } from './ui/InstallPrompt/InstallPrompt';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <OfflineBanner />
+          <InstallPrompt />
           <App />
           <Toaster />
         </BrowserRouter>
