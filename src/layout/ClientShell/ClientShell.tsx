@@ -1,9 +1,8 @@
 import { type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 import { BottomNav } from '../BottomNav/BottomNav';
 import { ThemeToggle } from '../../ui/ThemeToggle/ThemeToggle';
 import { NotificationBell } from '../../ui/NotificationBell/NotificationBell';
-import { useAuthStore } from '../../stores/authStore';
+import { UserMenu } from '../../ui/UserMenu/UserMenu';
 
 interface ClientShellProps {
   title?: string;
@@ -11,17 +10,6 @@ interface ClientShellProps {
 }
 
 export function ClientShell({ title, children }: ClientShellProps) {
-  const client = useAuthStore((s) => s.client);
-
-  const initials = client?.name
-    ? client.name
-        .split(' ')
-        .map((n) => n[0])
-        .slice(0, 2)
-        .join('')
-        .toUpperCase()
-    : (client?.login?.slice(0, 2).toUpperCase() ?? '?');
-
   return (
     <div className='min-h-screen bg-bg-base flex flex-col'>
       <header className='sticky top-0 z-30 h-14 flex items-center justify-between gap-2 px-4 bg-bg-surface border-b border-border-main'>
@@ -36,15 +24,10 @@ export function ClientShell({ title, children }: ClientShellProps) {
           </h1>
         </div>
 
-        <div className='flex items-center gap-1 shrink-0'>
+        <div className='flex items-center gap-1.5 shrink-0'>
           <ThemeToggle />
           <NotificationBell />
-          <Link
-            to='/settings'
-            className='h-8 w-8 rounded-full bg-navy-500 text-white flex items-center justify-center text-xs font-semibold ml-1'
-            aria-label='Account'>
-            {initials}
-          </Link>
+          <UserMenu />
         </div>
       </header>
 
