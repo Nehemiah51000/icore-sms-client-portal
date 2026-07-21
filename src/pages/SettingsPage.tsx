@@ -154,7 +154,7 @@ export function SettingsPage() {
     <div className='max-w-xl mx-auto space-y-6'>
       <Card className='shadow-xs border-border-main/70'>
         <CardHeader className='flex items-center gap-2 border-b border-border-main/60 px-5 py-4'>
-          <User className='h-4 w-4 text-navy-500' />
+          <User className='h-4 w-4 text-text-main' />
           <span className='text-sm font-bold text-text-main'>
             Login Profile
           </span>
@@ -170,7 +170,7 @@ export function SettingsPage() {
 
       <Card className='shadow-xs border-border-main/70'>
         <CardHeader className='flex items-center gap-2 border-b border-border-main/60 px-5 py-4'>
-          <Lock className='h-4 w-4 text-navy-500' />
+          <Lock className='h-4 w-4 text-text-main' />
           <span className='text-sm font-bold text-text-main'>
             Security & Password
           </span>
