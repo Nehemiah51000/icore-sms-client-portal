@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { Hash, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
+import { Hash, CheckCircle2, XCircle, Loader2, Handshake } from 'lucide-react';
 import {
   loadCreditSchema,
   type LoadCreditFormValues,
@@ -159,8 +159,8 @@ export function HomePage() {
   return (
     <div className='max-w-xl mx-auto space-y-6'>
       <div className='bg-bg-surface border border-border-main/60 p-4 sm:p-5 rounded-2xl shadow-xs flex items-center gap-3'>
-        <div className='h-10 w-10 rounded-xl bg-navy-500/10 text-navy-500 flex items-center justify-center shrink-0 font-bold text-base'>
-          👋
+        <div className='h-10 w-10 rounded-xl bg-navy-500/10 text-text-main flex items-center justify-center shrink-0 font-bold text-base'>
+          <Handshake />
         </div>
         <div>
           <h2 className='text-base font-semibold text-text-main'>
