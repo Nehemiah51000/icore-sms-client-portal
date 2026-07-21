@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { LogOut } from 'lucide-react';
+import { LogOut, User, Lock } from 'lucide-react';
 import { getProfile, updateProfile, updatePassword } from '../lib/api/profile';
 import { ApiError } from '../lib/api';
 import { useAuthStore } from '../stores/authStore';
@@ -48,7 +48,7 @@ function LoginForm({ initial }: { initial: ClientAccount }) {
   return (
     <div className='space-y-4'>
       <Input
-        label='Login'
+        label='Login Handle'
         value={login}
         onChange={(e) => setLogin(e.target.value)}
         error={error}
@@ -56,8 +56,9 @@ function LoginForm({ initial }: { initial: ClientAccount }) {
       <Button
         onClick={() => mutation.mutate()}
         loading={mutation.isPending}
-        fullWidth>
-        Save Login
+        fullWidth
+        className='hover:scale-[1.01] active:scale-[0.98] transition-transform'>
+        Save Username
       </Button>
     </div>
   );
@@ -123,7 +124,8 @@ function PasswordForm() {
       <Button
         onClick={() => mutation.mutate()}
         loading={mutation.isPending}
-        fullWidth>
+        fullWidth
+        className='hover:scale-[1.01] active:scale-[0.98] transition-transform'>
         Update Password
       </Button>
     </div>
@@ -149,31 +151,41 @@ export function SettingsPage() {
   }
 
   return (
-    <div className='space-y-4'>
-      <Card>
-        <CardHeader>
-          <span className='text-sm font-semibold text-text-main'>Login</span>
+    <div className='max-w-xl mx-auto space-y-6'>
+      <Card className='shadow-xs border-border-main/70'>
+        <CardHeader className='flex items-center gap-2 border-b border-border-main/60 px-5 py-4'>
+          <User className='h-4 w-4 text-navy-500' />
+          <span className='text-sm font-bold text-text-main'>
+            Login Profile
+          </span>
         </CardHeader>
-        <CardBody>
+        <CardBody className='p-5'>
           {isLoading || !data ? (
-            <div className='h-10 rounded bg-bg-base animate-pulse' />
+            <div className='h-12 rounded-xl bg-bg-base animate-pulse' />
           ) : (
             <LoginForm key={data.id} initial={data} />
           )}
         </CardBody>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <span className='text-sm font-semibold text-text-main'>Password</span>
+      <Card className='shadow-xs border-border-main/70'>
+        <CardHeader className='flex items-center gap-2 border-b border-border-main/60 px-5 py-4'>
+          <Lock className='h-4 w-4 text-navy-500' />
+          <span className='text-sm font-bold text-text-main'>
+            Security & Password
+          </span>
         </CardHeader>
-        <CardBody>
+        <CardBody className='p-5'>
           <PasswordForm />
         </CardBody>
       </Card>
 
-      <Button variant='secondary' fullWidth onClick={handleLogout}>
-        <LogOut className='h-4 w-4' /> Log Out
+      <Button
+        variant='secondary'
+        fullWidth
+        onClick={handleLogout}
+        className='py-3 border-red-500/20 text-red-600 hover:bg-red-500/10 active:scale-[0.98] transition-all'>
+        <LogOut className='h-4 w-4 mr-2' /> Log Out
       </Button>
     </div>
   );
