@@ -8,7 +8,7 @@ export const loadCreditSchema = z.object({
   phone: z
     .string()
     .min(1, 'Phone number is required')
-    .regex(/^254\d{9}$/, 'Use format 254XXXXXXXXX'),
+    .regex(/^254\d{9}$/, 'Enter a valid phone number'),
 });
 
 export type LoadCreditFormValues = z.infer<typeof loadCreditSchema>;

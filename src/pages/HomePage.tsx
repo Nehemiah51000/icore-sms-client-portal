@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { Smartphone, Hash, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
+import { Hash, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import {
   loadCreditSchema,
   type LoadCreditFormValues,
@@ -14,6 +14,7 @@ import { ApiError } from '../lib/api';
 import { Input } from '../ui/Input/Input';
 import { Button } from '../ui/Button/Button';
 import { Card, CardBody } from '../ui/Card/Card';
+import { PhoneInput } from '../ui/PhoneInput/PhoneInput';
 
 const stageCopy: Record<string, { label: string; helper: string }> = {
   stk_initiated: {
@@ -110,6 +111,7 @@ export function HomePage() {
     handleSubmit,
     setError,
     reset,
+    control,
     formState: { errors },
   } = useForm<LoadCreditFormValues>({
     resolver: zodResolver(loadCreditSchema),
@@ -168,14 +170,19 @@ export function HomePage() {
               error={errors.amount?.message}
               {...register('amount')}
             />
-            <Input
-              label='M-Pesa Phone Number'
-              placeholder='254791381097'
-              inputMode='numeric'
-              hint="You'll receive the payment prompt on this number."
-              leftIcon={<Smartphone className='h-4 w-4' />}
-              error={errors.phone?.message}
-              {...register('phone')}
+            <Controller
+              name='phone'
+              control={control}
+              render={({ field }) => (
+                <PhoneInput
+                  label='M-Pesa Phone Number'
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  hint="You'll receive the payment prompt on this number."
+                  error={errors.phone?.message}
+                />
+              )}
             />
             <Button type='submit' fullWidth loading={mutation.isPending}>
               Load Credit
