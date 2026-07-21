@@ -9,6 +9,8 @@ import {
   type NotificationItem,
 } from '../../lib/api/notifications';
 import { cn } from '../../lib/cn';
+import { playNotificationSound } from '../../lib/notificationSound';
+import { updateAppBadge } from '../../lib/appBadge';
 
 function timeAgo(dateString: string) {
   const diff = Date.now() - new Date(dateString).getTime();
@@ -23,6 +25,7 @@ function timeAgo(dateString: string) {
 export function NotificationBell() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const prevCountRef = useRef<number | undefined>(undefined);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -62,6 +65,21 @@ export function NotificationBell() {
 
   const items: NotificationItem[] = notifications?.data ?? [];
   const hasUnread = (unread?.count ?? 0) > 0;
+
+  useEffect(() => {
+    const count = unread?.count;
+    if (count === undefined) return;
+
+    updateAppBadge(count);
+
+    // Only play a sound when the count genuinely went up from a known
+    // baseline — never on first load, never when it goes down (e.g. after
+    // marking things read).
+    if (prevCountRef.current !== undefined && count > prevCountRef.current) {
+      playNotificationSound();
+    }
+    prevCountRef.current = count;
+  }, [unread?.count]);
 
   return (
     <div className='relative' ref={ref}>
