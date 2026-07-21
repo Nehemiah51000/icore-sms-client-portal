@@ -1,22 +1,16 @@
-// The Badging API is still experimental and not yet in TypeScript's
-// standard lib.dom types, so we describe just the two methods we need.
-interface NavigatorWithBadging extends Navigator {
-  setAppBadge?: (count: number) => Promise<void>;
-  clearAppBadge?: () => Promise<void>;
-}
-
-// Badging API — puts a small unread-count dot on the installed PWA's home
-// screen icon. Only does anything once the app is actually installed;
-// silently no-ops in a regular browser tab or on unsupported browsers.
+// TypeScript's lib.dom already types setAppBadge/clearAppBadge on Navigator
+// (as though always present), but most real browsers don't actually
+// implement the Badging API yet. This runtime check guards against calling
+// something that doesn't really exist, even though TS itself is satisfied
+// without one.
 export function updateAppBadge(count: number) {
-  const nav = navigator as NavigatorWithBadging;
-  if (!nav.setAppBadge || !nav.clearAppBadge) return;
+  if (!('setAppBadge' in navigator) || !('clearAppBadge' in navigator)) return;
 
   try {
     if (count > 0) {
-      nav.setAppBadge(count);
+      navigator.setAppBadge(count);
     } else {
-      nav.clearAppBadge();
+      navigator.clearAppBadge();
     }
   } catch {
     // Non-critical — ignore.
