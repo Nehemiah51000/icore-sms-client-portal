@@ -63,15 +63,12 @@ export function LoginPage() {
   return (
     <div className='min-h-screen bg-bg-base flex items-center justify-center p-6'>
       <div className='w-full max-w-xs'>
-        <div className='flex flex-col items-center gap-2 mb-8'>
+        <div className='flex flex-col items-center gap-3 mb-8'>
           <img
-            src='/ic_frame_2.svg'
-            alt='ICORE'
-            className='h-14 w-14 rounded-2xl'
+            src='/ICORE_logo_last_iteration.svg'
+            alt='ICORE Information Systems Ltd'
+            className='w-48 max-w-[70%] h-auto'
           />
-          <h1 className='text-lg font-semibold text-text-main mt-2'>
-            ICORE SMS
-          </h1>
           <p className='text-xs text-text-muted text-center'>
             Sign in to buy and manage your SMS credit
           </p>
