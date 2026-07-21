@@ -43,8 +43,6 @@ function StatusPanel({
   transactionId: number;
   onReset: () => void;
 }) {
-  // Prevents firing a duplicate toast every time the poll returns the same
-  // terminal stage again before the interval actually stops.
   const notifiedRef = useRef(false);
 
   const { data } = useQuery({
@@ -73,19 +71,23 @@ function StatusPanel({
   const isTerminal = stage === 'credit_loaded' || stage === 'failed';
 
   return (
-    <Card>
-      <CardBody className='flex flex-col items-center text-center py-8 gap-4'>
-        {stage === 'credit_loaded' ? (
-          <CheckCircle2 className='h-12 w-12 text-success-500' />
-        ) : stage === 'failed' ? (
-          <XCircle className='h-12 w-12 text-error-500' />
-        ) : (
-          <Loader2 className='h-12 w-12 text-navy-500 animate-spin' />
-        )}
+    <Card className='max-w-xl mx-auto shadow-md border-border-main/70'>
+      <CardBody className='flex flex-col items-center text-center py-10 px-6 gap-5'>
+        <div className='p-3 rounded-2xl bg-bg-base border border-border-main shadow-inner'>
+          {stage === 'credit_loaded' ? (
+            <CheckCircle2 className='h-12 w-12 text-success-500 animate-bounce' />
+          ) : stage === 'failed' ? (
+            <XCircle className='h-12 w-12 text-error-500 animate-shake' />
+          ) : (
+            <Loader2 className='h-12 w-12 text-navy-500 animate-spin' />
+          )}
+        </div>
 
         <div>
-          <p className='text-base font-semibold text-text-main'>{copy.label}</p>
-          <p className='text-sm text-text-muted mt-1 max-w-xs'>
+          <p className='text-lg font-bold text-text-main tracking-tight'>
+            {copy.label}
+          </p>
+          <p className='text-sm text-text-muted mt-1.5 max-w-sm leading-relaxed'>
             {stage === 'failed' && data?.failure_reason
               ? data.failure_reason
               : copy.helper}
@@ -93,7 +95,10 @@ function StatusPanel({
         </div>
 
         {isTerminal && (
-          <Button variant='secondary' onClick={onReset}>
+          <Button
+            variant='secondary'
+            onClick={onReset}
+            className='mt-2 hover:scale-[1.02] active:scale-[0.98]'>
             {stage === 'credit_loaded' ? 'Load More Credit' : 'Try Again'}
           </Button>
         )}
@@ -152,21 +157,31 @@ export function HomePage() {
   }
 
   return (
-    <div className='space-y-4'>
-      <p className='text-sm text-text-muted'>
-        Hi {client?.name ?? client?.login}, top up your SMS credit below.
-      </p>
+    <div className='max-w-xl mx-auto space-y-6'>
+      <div className='bg-bg-surface border border-border-main/60 p-4 sm:p-5 rounded-2xl shadow-xs flex items-center gap-3'>
+        <div className='h-10 w-10 rounded-xl bg-navy-500/10 text-navy-500 flex items-center justify-center shrink-0 font-bold text-base'>
+          👋
+        </div>
+        <div>
+          <h2 className='text-base font-semibold text-text-main'>
+            Welcome back, {client?.name ?? client?.login}
+          </h2>
+          <p className='text-xs sm:text-sm text-text-muted mt-0.5'>
+            Top up your SMS account credit seamlessly with M-Pesa.
+          </p>
+        </div>
+      </div>
 
-      <Card>
-        <CardBody>
+      <Card className='shadow-sm border-border-main/70 hover:border-border-main transition-colors'>
+        <CardBody className='p-6 sm:p-8'>
           <form
             onSubmit={handleSubmit((values) => mutation.mutate(values))}
-            className='space-y-4'>
+            className='space-y-5'>
             <Input
               label='Amount (KES)'
               placeholder='e.g. 500'
               inputMode='numeric'
-              leftIcon={<Hash className='h-4 w-4' />}
+              leftIcon={<Hash className='h-4 w-4 text-text-muted' />}
               error={errors.amount?.message}
               {...register('amount')}
             />
@@ -184,7 +199,11 @@ export function HomePage() {
                 />
               )}
             />
-            <Button type='submit' fullWidth loading={mutation.isPending}>
+            <Button
+              type='submit'
+              fullWidth
+              loading={mutation.isPending}
+              className='py-3 hover:scale-[1.01] active:scale-[0.98] transition-transform'>
               Load Credit
             </Button>
           </form>
