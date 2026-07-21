@@ -65,7 +65,7 @@ export function LoginPage() {
       <div className='w-full max-w-md space-y-6 animate-page-in'>
         <div className='flex flex-col items-center text-center gap-3'>
           {/* Enhanced Crisp Logo Card Container */}
-          <div className='px-6 py-4 sm:px-8 sm:py-5 rounded-2xl bg-bg-surface border border-border-main/80 shadow-sm hover:scale-102 transition-all flex items-center justify-center'>
+          <div className='px-6 py-4 sm:px-8 sm:py-5 rounded-2xl bg-white border border-border-main/80 shadow-sm hover:scale-102 transition-all flex items-center justify-center'>
             <img
               src='/ICORE_logo_last_iteration.svg'
               alt='ICORE Information Systems Ltd'
