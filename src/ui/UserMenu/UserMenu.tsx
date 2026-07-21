@@ -69,7 +69,7 @@ export function UserMenu() {
           <p className='text-sm font-medium text-text-main truncate'>
             {client?.name}
           </p>
-          <p className='text-xs text-text-muted truncate'>{client?.phone}</p>
+          <p className='text-xs text-text-muted truncate mt-1.5'>{`+${client?.phone}`}</p>
         </div>
 
         <button
