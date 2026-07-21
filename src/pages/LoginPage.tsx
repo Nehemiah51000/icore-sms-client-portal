@@ -61,21 +61,24 @@ export function LoginPage() {
   }
 
   return (
-    <div className='min-h-screen bg-bg-base flex items-center justify-center p-6'>
-      <div className='w-full max-w-xs'>
-        <div className='flex flex-col items-center gap-3 mb-8'>
-          <img
-            src='/ICORE_logo_last_iteration.svg'
-            alt='ICORE Information Systems Ltd'
-            className='w-48 max-w-[70%] h-auto'
-          />
-          <p className='text-xs text-text-muted text-center'>
-            Sign in to buy and manage your SMS credit
+    <div className='min-h-screen bg-bg-base flex items-center justify-center p-6 selection:bg-navy-500 selection:text-white'>
+      <div className='w-full max-w-md space-y-6 animate-page-in'>
+        <div className='flex flex-col items-center text-center gap-3'>
+          {/* Enhanced Crisp Logo Card Container */}
+          <div className='px-6 py-4 sm:px-8 sm:py-5 rounded-2xl bg-bg-surface border border-border-main/80 shadow-sm hover:scale-102 transition-all flex items-center justify-center'>
+            <img
+              src='/ICORE_logo_last_iteration.svg'
+              alt='ICORE Information Systems Ltd'
+              className='w-52 sm:w-64 h-auto max-h-20 object-contain [image-rendering:-webkit-optimize-contrast]'
+            />
+          </div>
+          <p className='text-xs sm:text-sm text-text-muted max-w-xs mt-1 font-medium'>
+            Sign in to buy, top up, and manage your SMS credit
           </p>
         </div>
 
-        <Card>
-          <CardBody>
+        <Card className='shadow-md border-border-main/80'>
+          <CardBody className='p-6 sm:p-8'>
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
               <Input
                 label='Login'
@@ -92,14 +95,18 @@ export function LoginPage() {
                 autoComplete='current-password'
                 {...register('password')}
               />
-              <Button type='submit' fullWidth loading={mutation.isPending}>
+              <Button
+                type='submit'
+                fullWidth
+                loading={mutation.isPending}
+                className='py-3 mt-2 hover:scale-[1.01] active:scale-[0.98] transition-transform'>
                 Sign In
               </Button>
             </form>
           </CardBody>
         </Card>
 
-        <p className='text-xs text-text-muted text-center mt-6'>
+        <p className='text-xs text-text-muted text-center leading-relaxed'>
           Don't have login details? Contact ICORE to get set up.
         </p>
       </div>
