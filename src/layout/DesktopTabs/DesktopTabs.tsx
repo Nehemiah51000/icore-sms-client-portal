@@ -12,9 +12,9 @@ export function DesktopTabs() {
           end={tab.end}
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
+              'flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
               isActive
-                ? 'bg-navy-500/10 text-navy-500'
+                ? 'bg-navy-500 text-white'
                 : 'text-text-muted hover:text-text-main hover:bg-bg-surface-hover',
             )
           }>

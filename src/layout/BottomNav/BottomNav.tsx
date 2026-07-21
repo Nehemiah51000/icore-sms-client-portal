@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { cn } from '../../lib/cn';
 import { navTabs } from '../navTabs';
+import { cn } from '../../lib/cn';
 
 export function BottomNav() {
   return (
@@ -12,14 +12,17 @@ export function BottomNav() {
           key={tab.to}
           to={tab.to}
           end={tab.end}
-          className={({ isActive }) =>
-            cn(
-              'flex-1 flex flex-col items-center justify-center gap-1 py-2.5 text-xs font-medium transition-colors',
-              isActive ? 'text-navy-500' : 'text-text-muted',
-            )
-          }>
-          <tab.icon className='h-5 w-5' />
-          {tab.label}
+          className='flex-1 flex items-center justify-center py-2'>
+          {({ isActive }) => (
+            <div
+              className={cn(
+                'flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl transition-all duration-200',
+                isActive ? 'bg-navy-500 text-white' : 'text-text-muted',
+              )}>
+              <tab.icon className='h-5 w-5' />
+              <span className='text-[11px] font-medium'>{tab.label}</span>
+            </div>
+          )}
         </NavLink>
       ))}
     </nav>
