@@ -39,8 +39,16 @@ interface PaginatedResponse<T> {
   total: number;
 }
 
-export function getClientTransactions(page: number) {
+export function getClientTransactions(
+  page: number,
+  filters: { startDate?: string; endDate?: string } = {},
+) {
+  const params = new URLSearchParams();
+  params.set('page', String(page));
+  if (filters.startDate) params.set('from_date', filters.startDate);
+  if (filters.endDate) params.set('to_date', filters.endDate);
+
   return api.get<PaginatedResponse<ClientTransaction>>(
-    `/client/transactions?page=${page}`,
+    `/client/transactions?${params.toString()}`,
   );
 }

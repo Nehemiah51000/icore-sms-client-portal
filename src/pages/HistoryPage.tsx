@@ -71,8 +71,8 @@ export function HistoryPage() {
     queryKey: ['client-transactions', { startDate, endDate }],
     queryFn: ({ pageParam }) =>
       // Pass start/end date stubs to your API call
-      // getClientTransactions(pageParam, { startDate, endDate }),
-      getClientTransactions(pageParam),
+      getClientTransactions(pageParam, { startDate, endDate }),
+
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
       lastPage.current_page < lastPage.last_page
